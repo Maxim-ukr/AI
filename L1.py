@@ -54,20 +54,37 @@
 # # головний цикл
 # cv2.waitKey(0)
 
+# умови з масивами
+# маска для пікселів які більше 128
+# mask = img > 128
+#
+# print(mask.shape)
+# print(mask.dtype)
+#
+# # дісати пікселі, які відповідають масці
+#
+# # print(img[mask])
+#
+# img[mask] = 255  # всі пікселі що відповідають масці
+# img[~mask] = 0   # всі пікселі що не відповідають масці
+#
+# cv2.imshow('', img)
+# cv2.waitKey(0)
+
 # __________________________________lab
 
 # Завдання 1
 # Відкрийте зображення data/lesson1/Lenna.png
 # Виведіть на екран розмір зображення, тип даних пікселів
 # зображення та саме зображення.
-import cv2
-
-img = cv2.imread('data/lesson1/Lenna.png', cv2.IMREAD_GRAYSCALE)
-
-# print(img.dtype)
-# print(img.shape)
-
-cv2.imshow(' ', img)
+# import cv2
+#
+# img = cv2.imread('data/lesson1/Lenna.png', cv2.IMREAD_GRAYSCALE)
+#
+# # print(img.dtype)
+# # print(img.shape)
+#
+# cv2.imshow(' ', img)
 
 # cv2.waitKey(0)
 
@@ -102,4 +119,18 @@ cv2.imshow(' ', img)
 # segment7 = img[77:-77, 77:-77]
 # cv2.imshow('7', segment7)
 
-cv2.waitKey(0)
+# Завдання 3
+# Відкрийте зображення data/lesson1/Lenna.png
+# Створіть наступні зображення:
+
+#  Чорне окрім центрального квадрата 100х100
+# img[:, -77:] = 0
+# img[:, :77] = 0
+# img[-77:, :] = 0
+# img[:77, :] = 0
+
+# cv2.imshow('7', img)
+#
+#
+#
+# cv2.waitKey(0)
