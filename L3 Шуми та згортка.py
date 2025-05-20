@@ -97,37 +97,84 @@
 # cv2.waitKey(0)
 
 # ______________________________
+# Завдання 1
+# Відкрийте зображення data/lesson3/notes.png
+# Проведіть бінарізацію(звичайну та адаптивну) та
+# покажіть результати.
+#
+#
+#
+# Спробуйте покращити результати за допомогою:
+#  гаусового розмиття з розміром фільтру 3, 5, 11 та
+# sigmaX 0, 1, 2, 10
+#  двосторонній фільтр(bilateral) або швидке очищення
+# від шуму(fastNLMeansDenoising)
+#
+#
+#
+# У всіх випадках покажіть оригінальне зображення,
+# зображення після видалення шуму та результат бінарізації.
+
+
+# import cv2
+#
+# image = cv2.imread('data/lesson3/notes.png')
+#
+# gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+#
+# # blur = cv2.GaussianBlur(gray,(3,3),10)
+# blur = cv2.bilateralFilter(gray,  # оригільне зображення
+#                               d=5,  # розмір ядра\фільра\рамки
+#                               sigmaColor=75,  # впливає на коефіцієнт за кольором
+#                               sigmaSpace=75,  # вплива на коефіцієнти як в гауса
+#                               )
+#
+#
+# result2 = cv2.adaptiveThreshold(blur,  # оригільне зображення(чорнобіле)
+#                                 255, # інтенсивність пікселів білого кольору
+#                                 cv2.ADAPTIVE_THRESH_GAUSSIAN_C,  # алгоритм як рахувати threshold
+#                                 cv2.THRESH_BINARY,  # тип бінарізації
+#                                 11,  # розмір ядра\фільра\рамки
+#                                 2,  # наскільки сильною є бінарізацію
+#                                 )
+#
+# cv2.imshow('result2', result2)
+#
+# cv2.imshow('image', image)
+# cv2.imshow('gray', gray)
+# cv2.waitKey(0)
+
 
 # Завдання 2
 # Відкрийте зображення data/lesson3/darken_page.png
 # Спробуйте дістати текст з цього зображення за
 # допомогою бінарізації та очищення шуму
 
-import cv2
-
-img = cv2.imread("data/lesson3/darken_page.jpg")
-
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# img_gray = cv2.equalizeHist(img_gray)
-
-img_gray = cv2.bilateralFilter(img_gray,  # оригільне зображення
-                              d=3,  # розмір ядра\фільра\рамки
-                              sigmaColor=75,  # впливає на коефіцієнт за кольором
-                              sigmaSpace=75,  # вплива на коефіцієнти як в гауса
-                              )
-
-
-thresh = cv2.adaptiveThreshold(img_gray,  # оригільне зображення(чорнобіле)
-                                255, # інтенсивність пікселів білого кольору
-                                cv2.ADAPTIVE_THRESH_MEAN_C,  # алгоритм як рахувати threshold
-                                cv2.THRESH_BINARY,  # тип бінарізації
-                                13,  # розмір ядра\фільра\рамки
-                                1.1,  # наскільки сильною є бінарізацію
-                                )
-
-
-cv2.imshow('Original', img)
-cv2.imshow('GRAY', img_gray)
-cv2.imshow('THRESH', thresh)
-
-cv2.waitKey(0)
+# import cv2
+#
+# img = cv2.imread("data/lesson3/darken_page.jpg")
+#
+# img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# # img_gray = cv2.equalizeHist(img_gray)
+#
+# img_gray = cv2.bilateralFilter(img_gray,  # оригільне зображення
+#                               d=3,  # розмір ядра\фільра\рамки
+#                               sigmaColor=75,  # впливає на коефіцієнт за кольором
+#                               sigmaSpace=75,  # вплива на коефіцієнти як в гауса
+#                               )
+#
+#
+# thresh = cv2.adaptiveThreshold(img_gray,  # оригільне зображення(чорнобіле)
+#                                 255, # інтенсивність пікселів білого кольору
+#                                 cv2.ADAPTIVE_THRESH_MEAN_C,  # алгоритм як рахувати threshold
+#                                 cv2.THRESH_BINARY,  # тип бінарізації
+#                                 13,  # розмір ядра\фільра\рамки
+#                                 1.1,  # наскільки сильною є бінарізацію
+#                                 )
+#
+#
+# cv2.imshow('Original', img)
+# cv2.imshow('GRAY', img_gray)
+# cv2.imshow('THRESH', thresh)
+#
+# cv2.waitKey(0)
