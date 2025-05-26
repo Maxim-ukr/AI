@@ -178,3 +178,34 @@
 # cv2.imshow('THRESH', thresh)
 #
 # cv2.waitKey(0)
+
+# Відкрийте зображення data/lesson3/castello_blurred.png
+# Спробуйте навести різкість зображення за наступним
+# алгоритмом:
+#  застосуйте гаусове розмиття та збережіть результат у
+# змінну blurred
+#  для певного числа alpha (від 0 до 10) створіть нове
+# зображення за формулою
+# (
+# )
+#  Виправте межі зображення за допомогою np.clip()
+#  Змініть тип даних зображення .astype(np.uint8)
+#  Покажіть результат
+# import numpy as np
+# import utils
+#
+# img = cv2.imread("data/lesson3/castello_blurred.png")
+#
+# @utils.trackbar_decorator(alpha=(0,10))
+# def task3(img, alpha =3.0):
+#     alpha = float(alpha)
+#     blurrred = cv2.GaussianBlur(img, (5, 5), 7)
+#
+#     image = (1 + alpha) * img - alpha * blurrred
+#     image = np.clip(image, 0, 255).astype(np.uint8)
+#
+#     cv2.imshow("orig", img)
+#     cv2.imshow("sharp", image)
+#     return image
+#
+# task3(img)

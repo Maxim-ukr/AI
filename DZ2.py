@@ -14,22 +14,42 @@
 # utils.trackbar_decorator
 # Переведіть результат назад у формат BGR
 # Виведіть результат для двох варіантів обробоки
+# from distutils.command.install import value
 
 import cv2
+import utils
+import numpy as np
+
+@utils.trackbar_decorator(alpha=(0,100))
+def value_change(img_hsv2, alpha=20):
+    value = img_hsv2[:, :, 2]
+    value = value * (1 + alpha / 100.0)
+    value = np.clip(value, 0, 255)
+    img_hsv[:, :, 2] = value.astype(np.uint8)
+
+    result = cv2.cvtColor(img_hsv, cv2.COLOR_HSV2BGR)
+
+    return result
+
 
 img = cv2.imread("data/lesson2/darken.png")
 
 img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-value = img_hsv[0:180,0:255,:]
+img_hsv2 = img_hsv.copy()
 
-print(value)
+img_hsv[:,:,2] = cv2.equalizeHist(img_hsv[:,:,2])
 
-# img_grsk = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# value = img_hsv2[:, :, 0]
+# value1 = img_hsv2[:, :, 1]
+# value2 = img_hsv2[:, :, 2]
 
-# new_img = cv2.equalizeHist(img_grsk)
+value = value_change(img_hsv2)
 
-# cv2.imshow("eqhist", new_img)
-cv2.imshow("IMG_hsv", img_hsv)
 cv2.imshow("IMG", img)
+cv2.imshow("IMG_hsv eqhist", img_hsv)
+cv2.imshow("IMG_hsv v=0", value)
+# cv2.imshow("IMG_hsv v=1", value1)
+# cv2.imshow("IMG_hsv v=2", value2)
 cv2.waitKey(0)
+

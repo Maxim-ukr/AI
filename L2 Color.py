@@ -1,27 +1,27 @@
-# import cv2
-# import utils
+import cv2
+import utils
 #
 # img = cv2.imread("data/lesson2/marbles.png")
-# # кольорове зображення у форматі bgr
+# кольорове зображення у форматі bgr
+
+# print(img)
 #
-# # print(img)
-# #
-# # print(img.shape)
-# # print(img.dtype)
-# #
-# # blue = img[:, :, 0]
-# # green = img[:, :, 1]
-# # red = img[:, :, 2]
-# #
-# # # # замінити червоний та залений на 0
-# # # img[:, :, 1] = 0
-# # # img[:, :, 2] = 0
-# #
-# # # замінити синій на 0
-# # img[:, :, 0] = 0
+# print(img.shape)
+# print(img.dtype)
 #
+# blue = img[:, :, 0]
+# green = img[:, :, 1]
+# red = img[:, :, 2]
 #
+# # # замінити червоний та залений на 0
+# img[:, :, 1] = 0
+# img[:, :, 2] = 0
 #
+# # замінити синій на 0
+# img[:, :, 0] = 0
+
+
+
 # cv2.imshow("image", img)
 # cv2.waitKey(0)
 
@@ -71,7 +71,7 @@
 #
 # @utils.trackbar_decorator(min_h=(0, 180), min_s=(0, 255), min_v=(0, 255),
 #                           max_h=(0, 180), max_s=(0, 255), max_v=(0, 255))
-# def func(img, min_h, min_s, min_v, max_h, max_s, max_v):
+# def funkciya(img, min_h, min_s, min_v, max_h, max_s, max_v):
 #     lower = (min_h, min_s, min_v)
 #     upper = (max_h, max_s, max_v)
 #
@@ -83,21 +83,24 @@
 #
 #     return mask
 #
-#
 # img = cv2.imread("data/lesson2/lego.jpg")
-# func(img)
+# mask = funkciya(img)
+#
+# cv2.imshow('mask', mask)
 
 
-# # вирівнювання гістограм
+
+
+# # # вирівнювання гістограм
 # new_img = cv2.equalizeHist(img)
 #
 # cv2.imshow("eqhist", new_img)
-
-# з кольоровим
+#
+# # з кольоровим
 # img = cv2.imread("data/lesson2/cell.png")
 #
 # lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
-# # канал l(luminance) -- яскравість
+# # # канал l(luminance) -- яскравість
 #
 # lab[:, :, 0] = cv2.equalizeHist(lab[:, :, 0])
 #
@@ -125,9 +128,9 @@
 # upper = (125, 255, 255)
 # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # mask = cv2.inRange(hsv, lower, upper)
-# # cv2.imshow("img", img)
-# # cv2.imshow("img1", mask)
-# # cv2.waitKey(0)
+# cv2.imshow("img", img)
+# cv2.imshow("img1", mask)
+# cv2.waitKey(0)
 # new_mask = mask.astype(bool)
 #
 # img[~new_mask] = 0
