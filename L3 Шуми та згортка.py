@@ -191,6 +191,7 @@
 #  Виправте межі зображення за допомогою np.clip()
 #  Змініть тип даних зображення .astype(np.uint8)
 #  Покажіть результат
+# import cv2
 # import numpy as np
 # import utils
 #
