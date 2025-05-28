@@ -129,11 +129,11 @@
 # Завдання 2
 # Відкрийте відео з файлу data\lesson7\text.mp4. Проведіть
 # бінарізацію кадрів та збережіть в новий файл.
-import cv2
-import numpy as np
-
-
-cap = cv2.VideoCapture(r'data\lesson7\text.mp4')
+# import cv2
+# import numpy as np
+#
+#
+# cap = cv2.VideoCapture(r'data\lesson7\text.mp4')
 # ret, img = cap.read()
 # if not ret:
 #     print("Не вдалося відкрити відео.")
@@ -158,67 +158,71 @@ cap = cv2.VideoCapture(r'data\lesson7\text.mp4')
 #
 # cv2.waitKey(0)
 
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))# Встановлення FPS
-print(width, height)
-writer = cv2.VideoWriter('data/lesson7/binar.mp4',
-                          cv2.VideoWriter_fourcc(*'mp4v'),
-                          30,  # FPS
-                          (width, height),  # Розмір кадру
-                          isColor=False
-                          )
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
-
-    # # Зміна розміру кадру
-    # resized_frame = cv2.resize(frame, None, fx=0.3, fy=0.3)
-
-    img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-    img = cv2.GaussianBlur(img,  # оригільне зображення
-                           ksize=(7, 7),  # розмір ядра\фільра\рамки
-                           sigmaX=10  # чим більше тим сильніше розмиття
-                           )
-    # НАВЕДЕННЯ РІЗКОСТІ - використовувати після розмиття
-    alpha = 2.0
-
-    blur = cv2.GaussianBlur(img,  # оригільне зображення
-                           ksize=(3, 3),  # розмір ядра\фільра\рамки
-                           sigmaX=0  # чим більше тим сильніше розмиття
-                           )
-
-    img = (1 + alpha) * img - (alpha * blur)
-
-    img = np.clip(img, 0, 255)
-    img = img.astype(np.uint8)
-    # НАВЕДЕННЯ РІЗКОСТІ - кінець
-
-    cv2.imshow('Sharp', img)
-
-    binar = cv2.adaptiveThreshold(img,  # оригільне зображення(чорнобіле)
-                                  255,  # інтенсивність пікселів білого кольору
-                                  cv2.ADAPTIVE_THRESH_GAUSSIAN_C,  # алгоритм як рахувати threshold
-                                  cv2.THRESH_BINARY,  # тип бінарізації
-                                  11,  # розмір ядра\фільра\рамки
-                                  2,  # наскільки сильною є бінарізацію
-                                  )
-
-    # Відображення кадру
-    cv2.imshow("Resized Frame", frame)
-    cv2.imshow("Binar", binar)
-
-    writer.write(binar)  # Запис кадру у відео
-
-    # Вихід з циклу при натисканні клавіші 'q'
-    if cv2.waitKey(100) & 0xFF == ord('q'):
-        break
-
-writer.release()
+# width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+# height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))# Встановлення FPS
+# print(width, height)
+# writer = cv2.VideoWriter('data/lesson7/binar.mp4',
+#                           cv2.VideoWriter_fourcc(*'mp4v'),
+#                           30,  # FPS
+#                           (width, height),  # Розмір кадру
+#                           isColor=False
+#                           )
+# while True:
+#     ret, frame = cap.read()
+#     if not ret:
+#         break
+#
+#     # # Зміна розміру кадру
+#     # resized_frame = cv2.resize(frame, None, fx=0.3, fy=0.3)
+#
+#     img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#
+#     img = cv2.GaussianBlur(img,  # оригільне зображення
+#                            ksize=(7, 7),  # розмір ядра\фільра\рамки
+#                            sigmaX=10  # чим більше тим сильніше розмиття
+#                            )
+#     # НАВЕДЕННЯ РІЗКОСТІ - використовувати після розмиття
+#     alpha = 2.0
+#
+#     blur = cv2.GaussianBlur(img,  # оригільне зображення
+#                            ksize=(3, 3),  # розмір ядра\фільра\рамки
+#                            sigmaX=0  # чим більше тим сильніше розмиття
+#                            )
+#
+#     img = (1 + alpha) * img - (alpha * blur)
+#
+#     img = np.clip(img, 0, 255)
+#     img = img.astype(np.uint8)
+#     # НАВЕДЕННЯ РІЗКОСТІ - кінець
+#
+#     cv2.imshow('Sharp', img)
+#
+#     binar = cv2.adaptiveThreshold(img,  # оригільне зображення(чорнобіле)
+#                                   255,  # інтенсивність пікселів білого кольору
+#                                   cv2.ADAPTIVE_THRESH_GAUSSIAN_C,  # алгоритм як рахувати threshold
+#                                   cv2.THRESH_BINARY,  # тип бінарізації
+#                                   11,  # розмір ядра\фільра\рамки
+#                                   2,  # наскільки сильною є бінарізацію
+#                                   )
+#
+#     # Відображення кадру
+#     cv2.imshow("Resized Frame", frame)
+#     cv2.imshow("Binar", binar)
+#
+#     writer.write(binar)  # Запис кадру у відео
+#
+#     # Вихід з циклу при натисканні клавіші 'q'
+#     if cv2.waitKey(100) & 0xFF == ord('q'):
+#         break
+#
+# writer.release()
 
 # Завдання 3
 # Відкрийте відео з файлу data\lesson7shapes.mp4.
 # Проведіть виділення країв на кадрах та збережіть в новий
 # файл.
+import ultralytics
+import torch
+import langchain
 
+model = ultralytics.YOLO("yolov8n.pt")
