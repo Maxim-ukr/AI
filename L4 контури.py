@@ -4,7 +4,7 @@ import utils
 
 
 # в opencv кольорове зображення у форматі BGR
-img = cv2.imread("data/lesson4/castello.png")
+# img = cv2.imread("data/lesson4/castello.png")
 
 
 # межі шукають на чорнобілому зображені
@@ -47,18 +47,20 @@ img = cv2.imread("data/lesson4/castello.png")
 #
 #     # розмити зображення
 #     gray = cv2.GaussianBlur(gray,
-#                             (5, 5),
-#                             sigmaX=2)
+#                             (7, 7),
+#                             sigmaX=3)
 #
 #     # алгоритм Canny(пошук меж)
 #     edged = cv2.Canny(gray, lower, upper)
 #
 #     return edged
 #
+# img = cv2.imread("data/lesson4/apple.png")
+#
 # func(img)
 
 
-# img = cv2.imread("data/lesson4/j.png", cv2.IMREAD_GRAYSCALE)
+
 #
 # # ерозія
 # # якщо навколо пікселя є хоча б один чорний -- то піксель стає чорним
@@ -75,11 +77,11 @@ img = cv2.imread("data/lesson4/castello.png")
 # both = cv2.erode(img, kernel)
 # both = cv2.dilate(both, kernel, iterations=2)
 #
-# cv2.imshow("original", img)
+cv2.imshow("original", img)
 # cv2.imshow("eroded", eroded)
 # cv2.imshow("dilate", dilated)
 # cv2.imshow("both", both)
-# cv2.waitKey(0)
+cv2.waitKey(0)
 #
 # # _________________________
 # # Завдання 1
