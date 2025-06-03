@@ -1,8 +1,8 @@
 # # шуми та згортка
-# import cv2
-# import numpy as np
+import cv2
+import numpy as np
 #
-# img = cv2.imread("data/lesson3/castello_noised.png")
+img = cv2.imread("data/lesson4/castello.png")
 #
 
 # згортка
@@ -49,15 +49,15 @@
 
 # двосторонній фільтр
 
-# new_img = cv2.bilateralFilter(img,  # оригільне зображення
-#                               d=5,  # розмір ядра\фільра\рамки
-#                               sigmaColor=75,  # впливає на коефіцієнт за кольором
-#                               sigmaSpace=75,  # вплива на коефіцієнти як в гауса
-#                               )
-#
-# cv2.imshow("bilateral", new_img)
-# cv2.imshow("original", img)
-# cv2.waitKey(0)
+new_img = cv2.bilateralFilter(img,  # оригільне зображення
+                              d=1,  # розмір ядра\фільра\рамки
+                              sigmaColor=75,  # впливає на коефіцієнт за кольором
+                              sigmaSpace=75,  # вплива на коефіцієнти як в гауса
+                              )
+
+cv2.imshow("bilateral", new_img)
+cv2.imshow("original", img)
+cv2.waitKey(0)
 
 
 # бінарізація(звичайна)

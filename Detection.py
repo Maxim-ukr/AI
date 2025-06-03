@@ -114,9 +114,12 @@ while True:
      #print(result.boxes)
      boxes = result.boxes
      names = result.names
+     print("___")
+     print(boxes)
+     print("___")
 
      for id, cls, xyxy in zip(boxes.id, boxes.cls, boxes.xyxy):
-         #     # print(cls, xyxy)
+         print(id, cls, xyxy)
          #
          # перевести все в int
          cls = int(cls)
