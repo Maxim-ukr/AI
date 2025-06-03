@@ -1,83 +1,83 @@
 import cv2
 import ultralytics
 import numpy as np
-#
-# # сегментація
-#
-# img = cv2.imread("data/lesson_seg/human.jpg")
-#
-# model = ultralytics.YOLO('yolo11n-seg.pt')
-# results = model.predict(img,
-#                         classes=[0])
-#
-# # отримати результат для першого зображення
-# result = results[0]
-#
-# print(result)
-# print(result.masks)
-#
-# # візуалізація
-# result.show()
-#
-# # дістати маску
-#
-# masks = result.masks.data
-#
-# # перевести в масив numpy
-# masks = masks.numpy()
-#
-# # змінити тип даних на bool
-# masks = masks.astype(bool)
-#
-# # отримати маску для першого об'єкта
-# mask = masks[0]
-#
-# print(mask)
-#
-# # візуалізація маски
-# mask_img = mask * 255
-# mask_img = mask_img.astype(np.uint8)
-#
-# cv2.imshow('mask', mask_img)
-#
-# # обрахунок площі об'єкту
-# area = mask.sum()  # площа в пікселях
-#
-# pixel_to_meter = 0.000001
-#
-# area_meter = area * pixel_to_meter
-# print(f"Площа в пікселях {area}")
-# print(f"Площа в метрах {area_meter}")
-#
-# # відсоток зайнятої площі від зображення
-# area_percent = mask.mean()  # середнє арифметичне
-#
-# print(f"Площа у відсотках {area_percent}")
-#
-# # інше зображення як фон
-# background = cv2.imread("data/lesson_seg/castello.png")
-#
-# # зробити фон та оригінальне зображення такогож розміру що й маска
-# height, width = mask.shape
-# background = cv2.resize(background, (width, height))
-# img = cv2.resize(img, (width, height))
-#
-# print(img.shape)
-# print(background.shape)
-#
-# # змінити фон
-#
-# new_img = img.copy()
-# new_img[~mask] = 255  # зробити фон білим
-#
-# # змінити фон на картинку
-# background[mask] = img[mask]
-#
-# cv2.imshow('white background', new_img)
-# cv2.imshow('img background', background)
-#
-#
-# cv2.waitKey(0)
+
+# сегментація
+
+img = cv2.imread("data/lesson_seg/human.jpg")
+
+model = ultralytics.YOLO('yolo11n-seg.pt')
+results = model.predict(img,
+                        classes=[0])
+
+# отримати результат для першого зображення
+result = results[0]
+
+print(result)
+print(result.masks)
+
+# візуалізація
+result.show()
+
+# дістати маску
+
+masks = result.masks.data
+
+# перевести в масив numpy
+masks = masks.numpy()
+
+# змінити тип даних на bool
+masks = masks.astype(bool)
+
+# отримати маску для першого об'єкта
+mask = masks[0]
+
+print(mask)
+
+# візуалізація маски
+mask_img = mask * 255
+mask_img = mask_img.astype(np.uint8)
+
+cv2.imshow('mask', mask_img)
+
+# обрахунок площі об'єкту
+area = mask.sum()  # площа в пікселях
+
+pixel_to_meter = 0.000001
+
+area_meter = area * pixel_to_meter
+print(f"Площа в пікселях {area}")
+print(f"Площа в метрах {area_meter}")
+
+# відсоток зайнятої площі від зображення
+area_percent = mask.mean()  # середнє арифметичне
+
+print(f"Площа у відсотках {area_percent}")
+
+# інше зображення як фон
+background = cv2.imread("data/lesson_seg/castello.png")
+
+# зробити фон та оригінальне зображення такогож розміру що й маска
+height, width = mask.shape
+background = cv2.resize(background, (width, height))
+img = cv2.resize(img, (width, height))
+
+print(img.shape)
+print(background.shape)
+
+# змінити фон
+
+new_img = img.copy()
+new_img[~mask] = 255  # зробити фон білим
+
+# змінити фон на картинку
+background[mask] = img[mask]
+
+cv2.imshow('white background', new_img)
+cv2.imshow('img background', background)
+
+
+cv2.waitKey(0)
 
 # _________________________________________
 
@@ -128,3 +128,48 @@ cv2.waitKey(0)
 # Проведіть сегментацію зображення
 # Порахуйте розмір кожної рослини(площа маски)
 # Покажіть найбільшу рослину кожного виду
+
+img = cv2.imread("data/lesson_seg/crop2.jpg")
+
+model = ultralytics.YOLO('data/lesson_seg/crop-seg.pt')
+results = model.predict(img)
+result = results[0]
+print(result.boxes)
+masks = result.masks.data.numpy()
+
+plant_ids = []
+plant_areas = []
+max_area = [0] * len(result.names)
+max_id = [-1] * len(result.names)
+
+# for id, mask in enumerate(masks):
+#     area = mask.sum()
+#     class_index = int(result.boxes.cls[id])
+#     plant_ids.append(class_index)
+#     plant_areas.append(area)
+#
+#     if area > max_area[class_index]:
+#         max_area[class_index] = area
+#         max_id[class_index] = id
+#
+# for id, area, class_index in zip(max_id, max_area, plant_ids):
+#     img2 = img.copy()
+#     mask = masks[id]
+#     mask = mask.astype(bool)
+#     img2 = cv2.resize(img2, mask.shape)
+#     img2[~mask] = 0
+#
+#     cv2.imshow(f'max {result.names[class_index]} plant, area - {area}', img2)
+
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+cls = result.boxes.cls
+mask_id0 = cls == 0
+masks0 = masks[mask_id0]
+areas = masks0.sum(axis=(1, 2))
+max_id = areas.argmax()
+
+print(masks0.shape)
+print(areas)
+print(max_id)
