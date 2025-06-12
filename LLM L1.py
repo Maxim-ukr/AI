@@ -2,69 +2,6 @@ from langchain_google_genai import GoogleGenerativeAI
 
 import dotenv
 import os
-
-# завантажити api ключі з папки .env
-dotenv.load_dotenv()
-
-# отримати сам ключ
-api_key = os.getenv('GEMINI_API_KEY')
-
-# створення моделі
-# Велика мовна модель(llm)
-
-# llm = GoogleGenerativeAI(
-#     model='gemini-2.0-flash',  # назва моделі
-#     google_api_key=api_key,    # ваша API
-# )
-#
-# # запуск моделі
-# response = llm.invoke("Привіт, що таке LLM?")
-# print(response)
-
-# як воно працює?
-# текст(запит) ділиться на токен(слова але не тільки)
-# для прикладу вище токени такі
-# <START> Привіт , що таке LLM ? <END>
-
-# модель отримує запит і шматок готової відповіді
-
-# Запит: <START> Привіт , що таке LLM ? <END>
-# Відповідь: <START> Привіт LLM це
-
-# Для кожного слова отримуємо ймовірність
-# що це слово має бути наступним
-# модель -- 20%
-# велика -- 18%
-# технологія -- 10%
-# яблуко -- 0,000000001%
-
-# параметри моделі
-#
-# llm = GoogleGenerativeAI(
-#     model='gemini-2.0-flash',  # назва моделі
-#     google_api_key=api_key,    # ваша API
-#     #top_k=10,                  # серед скількох найбільш ймовірних слів обирати нове слово
-#     temperature=1.7,            # температура
-#     max_output_tokens=20        # максимальна довжина відповіді у токенах
-# )
-
-# температура відповідає за креативність відповіді
-# 0 - 0,3 -- мала креативність(відповіді чіткі та ясні)
-# 0,4 - 1,2 -- середня креативність(відповіді інформативні, модель дає більш живі відподі)
-# 1,5 - 2,0 -- велика креативність(підходить для генерації текстів, створення історій)
-# 2.0 >   -- галюцинації
-
-
-# # запуск моделі
-# response = llm.invoke("Привіт, що таке LLM?")
-# print(response)
-#
-# # ________________________
-#
-# from langchain_google_genai import GoogleGenerativeAI
-#
-# import dotenv
-# import os
 #
 # # завантажити api ключі з папки .env
 # dotenv.load_dotenv()
@@ -192,34 +129,32 @@ api_key = os.getenv('GEMINI_API_KEY')
 # Для цього об’єднайте правила користування та питання в
 # один великий запит для моделі.
 # Користувач задає питання поки не введе порожній рядок.
-
-with open("data/lesson9/rules.txt", "r", encoding="UTF-8") as file:
-    rulse = file.read()
-
-llm = GoogleGenerativeAI(
-    model='gemini-2.0-flash',  # назва моделі
-    google_api_key=api_key,    # ваша API
-    #top_k=10,                  # серед скількох найбільш ймовірних слів обирати нове слово
-    temperature=0.3,            # температура
-    #max_output_tokens=10        # максимальна довжина відповіді у токенах
-)
-while True:
-    question = input('Ваше питання по інструкції або Ентер для закінчення. ')
-
-    if question == '':
-        break
-
-    query = f"""
-        В тебе є інструкція - {rulse}. 
-        Дай відповідь на питання {question}.
-    """
-
-    response = llm.invoke(query)
-
-    print(response)
-
-
-
+#
+# with open("data/lesson9/rules.txt", "r", encoding="UTF-8") as file:
+#     rulse = file.read()
+#
+# llm = GoogleGenerativeAI(
+#     model='gemini-2.0-flash',  # назва моделі
+#     google_api_key=api_key,    # ваша API
+#     #top_k=10,                  # серед скількох найбільш ймовірних слів обирати нове слово
+#     temperature=0.3,            # температура
+#     #max_output_tokens=10        # максимальна довжина відповіді у токенах
+# )
+# while True:
+#     question = input('Ваше питання по інструкції або Ентер для закінчення. ')
+#
+#     if question == '':
+#         break
+#
+#     query = f"""
+#         В тебе є інструкція - {rulse}.
+#         Дай відповідь на питання {question}.
+#     """
+#
+#     response = llm.invoke(query)
+#
+#     print(response)
+#
 # Завдання 3
 # Створіть найпростішого чат бота. Напишіть інструкцію
 # як саме поводитись моделі(в якій манері відповідати, можна
@@ -236,3 +171,26 @@ while True:
 # AI: message4
 # Human: message5
 # AI:
+#
+# llm = GoogleGenerativeAI(
+#     model='gemini-2.0-flash',  # назва моделі
+#     google_api_key=api_key,    # ваша API
+#     #top_k=10,                  # серед скількох найбільш ймовірних слів обирати нове слово
+#     temperature=0.3,            # температура
+#     #max_output_tokens=10        # максимальна довжина відповіді у токенах
+# )
+#
+# query = '''Instruction: Ти - чат бот. Твоя задача - відповідати на питання в віччливій формі.'''
+#
+# while True:
+#     question = input('Ваше питання по інструкції або Ентер для закінчення. ')
+#
+#     if question == '':
+#         break
+#
+#     query += f'\n HUMAN: {question}\n AI:'
+#
+#     response = llm.invoke(query)
+#     query += response
+#
+#     print(response)
