@@ -96,6 +96,24 @@ trimmer = trim_messages(
     include_system=True  # SystemMessage не чіпати
 )
 
+# ________________________STRIM
+# _____________________________________________________________________СТРІМЛІТ
+
+# основний заголовок
+st.title('Проект «Срібна нитка»') # Silver Thread
+st.markdown("<p style='text-align: right;'>«Ми йдемо за ниткою — до розуміння.»</p>", unsafe_allow_html=True) #We follow the thread — to understanding
+
+# простий текст
+# st.markdown(" ")
+# st.markdown(" ")
+st.markdown(" ")
+st.markdown('''***Штучний інтелект у допомогу батькам дітей з аутизмом 
+(на базі особистої бібліотеки наукових статей ГО "Центр Перспектива").***''')
+st.markdown("---")
+st.markdown(" ")
+
+# ________________________STRIM END
+
 # Велика мовна модель(llm)
 # чат бот
 
@@ -158,17 +176,3 @@ for message in st.session_state['messages']:
     with st.chat_message(role):
         st.markdown(text)
 
-# _____________________________________________________________________СТРІМЛІТ
-
-# основний заголовок
-st.title('Проект «Срібна нитка»') # Silver Thread
-st.markdown("<p style='text-align: right;'>«Ми йдемо за ниткою — до розуміння.»</p>", unsafe_allow_html=True) #We follow the thread — to understanding
-
-# простий текст
-# st.markdown(" ")
-# st.markdown(" ")
-st.markdown(" ")
-st.markdown('''***Штучний інтелект у допомогу батькам дітей з аутизмом 
-(на базі особистої бібліотеки наукових статей ГО "Центр Перспектива").***''')
-st.markdown("---")
-st.markdown(" ")
