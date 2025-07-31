@@ -52,7 +52,7 @@ if not pc.has_index(index_name):
             region="us-east-1"  # регіон де знаходиться сервер(впливає на оплату)
         )
     )
-    print(f"Created VBD {index_name}")
+    # print(f"Created VBD {index_name}")
 
 index = pc.Index(index_name)
 
@@ -76,7 +76,7 @@ def vbd_doc_ser(user_text: str):
     :param user_text: str, питання користувача
     :return: list[Document], список знайдених у векторній базі даних документів.
     '''
-    print("vbd_doc_ser")
+    # print("vbd_doc_ser")
     docs = vector_store.similarity_search(user_text, k=3) #В ПРОДУКТІ, ПІСЛЯ ЗАПОВНЕННЯ БД ЗМІНИТИ НА 10
     return docs
 
