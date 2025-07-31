@@ -22,6 +22,10 @@ from langchain_core.messages import (
 )
 
 
+# отримати сам ключ
+api_key = st.secrets.get('GEMINI_API_KEY')
+pinecone_api_key = st.secrets.get('PINECONE_API_KEY')
+
 
 # _____________КОД З ФАЙЛУ СідьверСредВБ______________________
 
@@ -168,7 +172,3 @@ st.markdown('''***Штучний інтелект у допомогу батьк
 (на базі особистої бібліотеки наукових статей ГО "Центр Перспектива").***''')
 st.markdown("---")
 st.markdown(" ")
-
-# отримати сам ключ
-api_key = st.secrets.get('GEMINI_API_KEY')
-pinecone_api_key = st.secrets.get('PINECONE_API_KEY')
