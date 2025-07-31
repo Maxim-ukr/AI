@@ -22,22 +22,6 @@ from langchain_core.messages import (
 )
 
 
-# основний заголовок
-st.title('Проект «Срібна нитка»') # Silver Thread
-st.markdown("<p style='text-align: right;'>«Ми йдемо за ниткою — до розуміння.»</p>", unsafe_allow_html=True) #We follow the thread — to understanding
-
-# простий текст
-# st.markdown(" ")
-# st.markdown(" ")
-st.markdown(" ")
-st.markdown('''***Штучний інтелект у допомогу батькам дітей з аутизмом 
-(на базі особистої бібліотеки наукових статей ГО "Центр Перспектива").***''')
-st.markdown("---")
-st.markdown(" ")
-
-# отримати сам ключ
-api_key = st.secrets.get('GEMINI_API_KEY')
-pinecone_api_key = st.secrets.get('PINECONE_API_KEY')
 
 # _____________КОД З ФАЙЛУ СідьверСредВБ______________________
 
@@ -170,4 +154,21 @@ for message in st.session_state['messages']:
     with st.chat_message(role):
         st.markdown(text)
 
-# Як запускать екзешніком
+# _____________________________________________________________________СТРІМЛІТ
+
+# основний заголовок
+st.title('Проект «Срібна нитка»') # Silver Thread
+st.markdown("<p style='text-align: right;'>«Ми йдемо за ниткою — до розуміння.»</p>", unsafe_allow_html=True) #We follow the thread — to understanding
+
+# простий текст
+# st.markdown(" ")
+# st.markdown(" ")
+st.markdown(" ")
+st.markdown('''***Штучний інтелект у допомогу батькам дітей з аутизмом 
+(на базі особистої бібліотеки наукових статей ГО "Центр Перспектива").***''')
+st.markdown("---")
+st.markdown(" ")
+
+# отримати сам ключ
+api_key = st.secrets.get('GEMINI_API_KEY')
+pinecone_api_key = st.secrets.get('PINECONE_API_KEY')
