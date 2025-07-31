@@ -1,4 +1,4 @@
-#                                                                                       ЗРОБЛЕНО в.1(27-07)
+#                                                                                       ЗРОБЛЕНО в.2(30-07)
 # # streamlit
 # import json
 # import dotenv
